@@ -10,12 +10,27 @@ function findById(id) {
     .first()
 }
 
-function findSteps(id) {
-    return db('steps')
-    .join('schemes', 'schemes.id', 'steps.scheme_id')
-    .select('steps.id', 'steps.step_number', 'steps.instructions', 'steps.scheme_id')
-    .where({scheme_id: id})
-}
+// function findSteps(id) {
+//     return db('steps')
+//     .join('schemes', 'schemes.id', 'steps.scheme_id')
+//     .select('steps.id', 'steps.step_number', 'steps.instructions', 'steps.scheme_id')
+//     .where({scheme_id: id})
+// }
+
+// function findSteps(id) {
+//     return db('steps as st')
+//       .join('schemes as sc', 'sc.id', 'st.scheme_id')
+//       .select('st.id', 'st.step_number', 'st.instructions', 'st.scheme_id')
+//       .where({ scheme_id: id })
+//   }
+
+  function findSteps(id) {
+    return db("steps")
+      .join("schemes", "schemes.id", "steps.scheme_id")
+      .select("schemes.scheme_name", "steps.step_number", "steps.instructions")
+      .where({ scheme_id: id })
+    //   .orderBy("steps.step_number");
+  }
 
 // function findSteps(id){
 //     return db('scheme as s')
